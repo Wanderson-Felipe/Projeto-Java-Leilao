@@ -30,12 +30,11 @@ public class ProdutosDAO {
             st.setString(3, produto.getStatus());
 
             status = st.executeUpdate();
-            System.out.println("Produto cadastrado com sucesso!");
+            return status;
         } catch (SQLException ex) {
             System.out.println("Erro ao conectar: " + ex.getMessage());
             return ex.getErrorCode();
         }
-        return status;
     }
 
     public ArrayList<ProdutosDTO> listarProdutos() {
