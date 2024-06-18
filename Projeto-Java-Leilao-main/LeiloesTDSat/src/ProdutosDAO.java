@@ -7,23 +7,21 @@
  *
  * @author Adm
  */
-
 import java.sql.PreparedStatement;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-
 public class ProdutosDAO {
-    
+
     conectaDAO conexao;
     Connection conn;
     PreparedStatement prep;
     ResultSet resultset;
     ArrayList<ProdutosDTO> listagem = new ArrayList<>();
-    
-     public boolean conectar() {
+
+    public boolean conectar() {
         this.conexao = new conectaDAO();
         this.conn = this.conexao.getConnectDB();
         if (this.conn == null) {
@@ -31,21 +29,16 @@ public class ProdutosDAO {
         } else {
             return true;
         }
-    
+
     }
-    
-    public void cadastrarProduto (ProdutosDTO produto){
-        
-    
+
+    public void cadastrarProduto(ProdutosDTO produto) {
+
     }
-    
-    public ArrayList<ProdutosDTO> listarProdutos(){
-        
+
+    public ArrayList<ProdutosDTO> listarProdutos() {
+
         return listagem;
     }
-    
-    
-    
-        
-}
 
+}

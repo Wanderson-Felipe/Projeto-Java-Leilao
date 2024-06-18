@@ -6,19 +6,19 @@ import javax.swing.JOptionPane;
 
 public class conectaDAO {
 
-    public Connection getConnectDB() {
-      
-        try {
-            Connection conn = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/uc11",
-                    "root",
-                    "Wanderfelipe135$"
-            );
-            return conn;
-        } catch (Exception e) {
-            System.out.println("Erro ao Conectar: " + e.getMessage());
-            return null;
-        }
-    }
-}
+    private static String url = "jdbc:mysql://localhost:3306/uc11?useSSL=false";
+    private static String user = "root";
+    private static String password = "Wanderfelipe13$";
 
+    public Connection getConnectDB() {
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection(url, user, password);
+
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "Erro ConectaDAO" + erro.getMessage());
+        }
+        return conn;
+    }
+
+}
