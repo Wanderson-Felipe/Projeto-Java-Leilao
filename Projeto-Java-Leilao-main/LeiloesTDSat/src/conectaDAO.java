@@ -10,7 +10,7 @@ public class conectaDAO {
     private static String user = "root";
     private static String password = "Wanderfelipe13$";
 
-    public Connection getConnectDB() {
+    public Connection connectDB() {
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url, user, password);

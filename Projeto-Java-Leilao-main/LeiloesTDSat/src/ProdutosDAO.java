@@ -12,33 +12,42 @@ import java.sql.Connection;
 import javax.swing.JOptionPane;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.sql.SQLException;
 
 public class ProdutosDAO {
 
-    conectaDAO conexao;
     Connection conn;
     PreparedStatement prep;
     ResultSet resultset;
-    ArrayList<ProdutosDTO> listagem = new ArrayList<>();
 
-    public boolean conectar() {
-        this.conexao = new conectaDAO();
-        this.conn = this.conexao.getConnectDB();
-        if (this.conn == null) {
-            return false;
-        } else {
-            return true;
+    public int cadastrarProduto(ProdutosDTO produto) {
+        conn = new conectaDAO().connectDB();
+        int status;
+        try {
+            PreparedStatement st = conn.prepareStatement("INSERT INTO produtos (nome, valor, status) VALUES (?, ?, ?)");
+            st.setString(1, produto.getNome());
+            st.setInt(2, produto.getValor());
+            st.setString(3, produto.getStatus());
+
+            status = st.executeUpdate();
+            System.out.println("Produto cadastrado com sucesso!");
+        } catch (SQLException ex) {
+            System.out.println("Erro ao conectar: " + ex.getMessage());
+            return ex.getErrorCode();
         }
-
-    }
-
-    public void cadastrarProduto(ProdutosDTO produto) {
-
+        return status;
     }
 
     public ArrayList<ProdutosDTO> listarProdutos() {
-
+        ArrayList<ProdutosDTO> listagem = new ArrayList<>();
         return listagem;
     }
 
+    public void desconectar() {
+        try {
+            this.conn.close();
+        } catch (SQLException ex) {
+            System.out.println("Erro ao Desconectar " + ex.getMessage());
+        }
+    }
 }
