@@ -1,10 +1,17 @@
 
+import javax.swing.JOptionPane;
+
+
 public class cadastroVIEW extends javax.swing.JFrame {
 
     public cadastroVIEW() {
         initComponents();
     }
 
+    private void limparTela(){
+        cadastroNome.setText ("");
+        cadastroValor.setText ("");
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -124,16 +131,26 @@ public class cadastroVIEW extends javax.swing.JFrame {
     }//GEN-LAST:event_cadastroNomeActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        try {
         ProdutosDTO produto = new ProdutosDTO();
         String nome = cadastroNome.getText();
         String valor = cadastroValor.getText();
         String status = "A Venda";
+        
         produto.setNome(nome);
         produto.setValor(Integer.parseInt(valor));
         produto.setStatus(status);
 
         ProdutosDAO produtodao = new ProdutosDAO();
         produtodao.cadastrarProduto(produto);
+        
+        JOptionPane.showMessageDialog(this, "Produto cadastrado com sucesso!");
+        limparTela();
+        }catch (Exception e){
+        
+            JOptionPane.showMessageDialog(this, "Erro ao Cadastrar Produto");
+        }
+        
 
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
