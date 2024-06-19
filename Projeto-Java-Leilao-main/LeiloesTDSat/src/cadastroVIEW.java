@@ -1,4 +1,6 @@
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
 
@@ -6,6 +8,7 @@ public class cadastroVIEW extends javax.swing.JFrame {
 
     public cadastroVIEW() {
         initComponents();
+        centralizarJanela();
     }
 
     private void limparTela(){
@@ -13,6 +16,20 @@ public class cadastroVIEW extends javax.swing.JFrame {
         cadastroValor.setText ("");
     }
     @SuppressWarnings("unchecked")
+    
+     private void centralizarJanela() {
+        Dimension dimensaoTela = Toolkit.getDefaultToolkit().getScreenSize();
+        int larguraTela = dimensaoTela.width;
+        int alturaTela = dimensaoTela.height;
+
+        int larguraJanela = this.getSize().width;
+        int alturaJanela = this.getSize().height;
+
+        int posX = (larguraTela - larguraJanela) / 2;
+        int posY = (alturaTela - alturaJanela) / 2;
+
+        this.setLocation(posX, posY);
+    }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -138,7 +155,7 @@ public class cadastroVIEW extends javax.swing.JFrame {
         String status = "A Venda";
         
         produto.setNome(nome);
-        produto.setValor(Integer.parseInt(valor));
+        produto.setValor(Integer.valueOf(valor));
         produto.setStatus(status);
 
         ProdutosDAO produtodao = new ProdutosDAO();

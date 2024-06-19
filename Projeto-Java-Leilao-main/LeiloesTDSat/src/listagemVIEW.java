@@ -1,6 +1,6 @@
 
-import java.sql.Connection;
-import java.util.ArrayList;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -9,6 +9,20 @@ public class listagemVIEW extends javax.swing.JFrame {
     public listagemVIEW() {
         initComponents();
         listarProdutos();
+        centralizarJanela();
+    }
+     private void centralizarJanela() {
+        Dimension dimensaoTela = Toolkit.getDefaultToolkit().getScreenSize();
+        int larguraTela = dimensaoTela.width;
+        int alturaTela = dimensaoTela.height;
+
+        int larguraJanela = this.getSize().width;
+        int alturaJanela = this.getSize().height;
+
+        int posX = (larguraTela - larguraJanela) / 2;
+        int posY = (alturaTela - alturaJanela) / 2;
+
+        this.setLocation(posX, posY);
     }
 
     /**
