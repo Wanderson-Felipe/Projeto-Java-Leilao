@@ -52,6 +52,19 @@ public class ProdutosDAO {
             System.out.println("erro:" + e.getMessage());
         }
         return listagem;
+
+    }
+
+    public boolean venderProduto(int id) {
+        String sql = "UPDATE produtos SET status 'vendido' WHERE id = ?";
+        try (PreparedStatement st = conn.prepareStatement(sql)) {
+            st.setInt(1, id);
+            int rowsUpdated = st.executeUpdate();
+            return rowsUpdated > 0;
+        } catch (SQLException ex) {
+            System.out.println("Erro ao atualizar produto: " + ex.getMessage());
+            return false;
+        }
     }
 
     public void desconectar() {
