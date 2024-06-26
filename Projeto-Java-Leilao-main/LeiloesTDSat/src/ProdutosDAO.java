@@ -52,6 +52,42 @@ public class ProdutosDAO {
             System.out.println("erro:" + e.getMessage());
         }
         return listagem;
+
+    }
+
+    public boolean venderProduto(int id) {
+        String sql = "UPDATE produtos SET status = 'Vendido' WHERE id = ?";
+        try (PreparedStatement st = conn.prepareStatement(sql)) {
+            st.setInt(1, id);
+            int rowsUpdated = st.executeUpdate();
+            return rowsUpdated > 0;
+        } catch (SQLException ex) {
+            System.out.println("Erro ao vender produto " + ex.getMessage());
+            return false;
+        }
+    }
+
+    public List<ProdutosDTO> ListarProdutosVendidos() {
+        String sql = "SELECT * FROM produtos WHERE status = 'Vendido'";
+        List<ProdutosDTO> listagem = new ArrayList<>();
+        try {
+
+            PreparedStatement st = this.conn.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+
+            while (rs.next()) {
+                ProdutosDTO produtosdto = new ProdutosDTO();
+                produtosdto.setId(rs.getInt("id"));
+                produtosdto.setNome(rs.getString("Nome"));
+                produtosdto.setValor(rs.getInt("Valor"));
+                produtosdto.setStatus(rs.getString("Status"));
+                listagem.add(produtosdto);
+            }
+        } catch (SQLException e) {
+            System.out.println("erro:" + e.getMessage());
+        }
+        return listagem;
+
     }
 
     public void desconectar() {
